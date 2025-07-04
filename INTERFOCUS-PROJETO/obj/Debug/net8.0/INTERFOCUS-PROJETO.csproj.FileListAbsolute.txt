@@ -1,0 +1,14 @@
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\bin\Debug\net8.0\INTERFOCUS-PROJETO.exe
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\bin\Debug\net8.0\INTERFOCUS-PROJETO.deps.json
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\bin\Debug\net8.0\INTERFOCUS-PROJETO.runtimeconfig.json
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\bin\Debug\net8.0\INTERFOCUS-PROJETO.dll
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\bin\Debug\net8.0\INTERFOCUS-PROJETO.pdb
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.AssemblyInfoInputs.cache
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.AssemblyInfo.cs
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.csproj.CoreCompileInputs.cache
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.dll
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\refint\INTERFOCUS-PROJETO.dll
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.pdb
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\INTERFOCUS-PROJETO.genruntimeconfig.cache
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\ref\INTERFOCUS-PROJETO.dll

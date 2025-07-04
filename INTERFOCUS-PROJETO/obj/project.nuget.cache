@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "dFWE17QQ0mo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\breno\\source\\repos\\INTERFOCUS-PROJETO\\INTERFOCUS-PROJETO\\InterfocusConsole.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\breno\\.nuget\\packages\\microsoft.azure.amqp\\2.7.0\\microsoft.azure.amqp.2.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
