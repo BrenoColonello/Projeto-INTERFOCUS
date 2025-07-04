@@ -10,7 +10,7 @@ using Microsoft.Azure.Amqp;
 
 namespace INTERFOCUS_PROJETO.Services
 
-{ 
+}
 
 
 }
