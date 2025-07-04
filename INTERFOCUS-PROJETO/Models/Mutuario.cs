@@ -36,6 +36,7 @@ namespace INTERFOCUS_PROJETO.Models
 
         public float TotalEmAberto { get; set; }
 
+    }
 
         public virtual IList<Divida> DividasDoCliente { get; set; } = new List<Divida>();
     }
