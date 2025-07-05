@@ -65,22 +65,42 @@ namespace INTERFOCUS_PROJETO.Services
             erros = new List<ValidationResult>();
             using var sessao = session.OpenSession();
             using var transaction = sessao.BeginTransaction();
-            var Aluno = sessao.Query<Mutuario>()
+            var mutuario = sessao.Query<Mutuario>()
                 .Where(c => c.Codigo == id)
                 .FirstOrDefault();
-            if (Aluno == null)
+            if (mutuario == null)
             {
                 erros.Add(new ValidationResult("Registro não encontrado",
                     new[] { "id" }));
                 return null;
             }
 
-            sessao.Delete(Aluno);
+            sessao.Delete(mutuario);
             transaction.Commit();
-            return Aluno;
+            return mutuario;
         }
 
+        public virtual List<Mutuario> Listar()
+        {
+            using var sessao = session.OpenSession();
+            var mutuarios = sessao.Query<Mutuario>().ToList();
+            return mutuarios;
+        }
+
+        public virtual List<Mutuario> Listar(string busca)
+        {
+            using var sessao = session.OpenSession();
+            var Alunos = sessao.Query<Mutuario>()
+                .Where(c => c.Nome.Contains(busca) ||
+                            c.Email.Contains(busca))
+                .OrderBy(c => c.Id)
+                .ToList();
+            return Alunos;
+        }
+
+
     }
+}
 
 
 }

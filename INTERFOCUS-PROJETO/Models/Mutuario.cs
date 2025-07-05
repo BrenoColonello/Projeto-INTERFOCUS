@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 namespace INTERFOCUS_PROJETO.Models
 {
     public class Mutuario
+
     {
+
+        public int Id { get; set; }
         [Required(ErrorMessage = "Nome é obrigatório")]
         public string Nome { get; set; }
 
@@ -31,6 +34,7 @@ namespace INTERFOCUS_PROJETO.Models
                 }
             }
         }
+
 
         [Required(ErrorMessage = "Data de Nascimento é obrigatório")]
         public DateOnly Nascimento { get; set; }
