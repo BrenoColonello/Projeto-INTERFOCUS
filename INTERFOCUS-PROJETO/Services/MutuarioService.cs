@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using INTERFOCUS_PROJETO.Models;
-using Microsoft.Azure.Amqp;
+using NHibernate;
 
 
 namespace INTERFOCUS_PROJETO.Services
@@ -66,7 +61,7 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             using var transaction = sessao.BeginTransaction();
             var mutuario = sessao.Query<Mutuario>()
-                .Where(c => c.Codigo == id)
+                .Where(c => c.Id == id)
                 .FirstOrDefault();
             if (mutuario == null)
             {
@@ -103,4 +98,3 @@ namespace INTERFOCUS_PROJETO.Services
 }
 
 
-}

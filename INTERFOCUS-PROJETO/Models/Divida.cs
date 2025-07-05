@@ -74,7 +74,7 @@ namespace INTERFOCUS_PROJETO.Models
 
 
         [Required(ErrorMessage = "É necessário informar o id do dono da divida")]
-        public virtual Cliente ClienteDaDivida { get; set; }
-        //public int IdCliente {get; set;}
+        public virtual Mutuario MutuarioDaDivida { get; set; }
+        //public int IdMutuario {get; set;}
     }
 }
