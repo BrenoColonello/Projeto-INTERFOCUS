@@ -8,6 +8,22 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Folder Include="Services/" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="hibernate.cfg.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<EmbeddedResource Include="Mappings/Mutuario.hbm.xml" />
+		<!-- <EmbeddedResource Include="Mappings\Curso.hbm.xml" /> -->
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="5.5.2" />
   </ItemGroup>

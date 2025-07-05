@@ -75,22 +75,22 @@ namespace INTERFOCUS_PROJETO.Services
             return mutuario;
         }
 
-        public virtual List<Mutuario> Listar()
+        public List<Mutuario> Listar()
         {
             using var sessao = session.OpenSession();
             var mutuarios = sessao.Query<Mutuario>().ToList();
             return mutuarios;
         }
 
-        public virtual List<Mutuario> Listar(string busca)
+        public List<Mutuario> Listar(string busca)
         {
             using var sessao = session.OpenSession();
-            var Alunos = sessao.Query<Mutuario>()
+            var Mutuarios = sessao.Query<Mutuario>()
                 .Where(c => c.Nome.Contains(busca) ||
                             c.Email.Contains(busca))
                 .OrderBy(c => c.Id)
                 .ToList();
-            return Alunos;
+            return  Mutuarios;
         }
 
 
