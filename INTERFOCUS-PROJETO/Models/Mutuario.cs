@@ -38,8 +38,36 @@ namespace INTERFOCUS_PROJETO.Models
 
 
         [Required(ErrorMessage = "Data de Nascimento é obrigatório")]
-        public DateTime Nascimento { get; set; }
-        public string? Email { get; set; }
+        private DateTime nascimento;
+
+        public DateTime Nascimento
+        {
+            get { return nascimento; }
+
+            set
+            {
+                if (VerificarNascimento(value, out List<ValidationResult> erros) == false)
+                {
+                    Console.WriteLine(erros);
+                    throw new ArgumentException("Data incorreta");
+                }
+                nascimento = value;
+            }
+        }
+        private string email;
+        public string? Email { get { return email; } set => email = value.ToLower(); }
+
+
+        private bool VerificarNascimento(DateTime data, out List<ValidationResult> erros)
+        {
+            erros = new List<ValidationResult>();
+            if (DateTime.Now < data)
+            {
+                erros.Add(new ValidationResult($"Data nascimento {data.ToString()} posterior a data atual {DateTime.Now.ToString()}"));
+                return false;
+            }
+            return true;
+        }
 
 
 

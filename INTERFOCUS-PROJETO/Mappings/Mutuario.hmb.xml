@@ -10,7 +10,7 @@
 			</generator>
 		</id>
 		<property name="Nome"	column="nome"	type="string"		length="100"	not-null="true"	/>
-		<property name="Cpf"  column="cpf" type="string"		length="11"	not-null="true" />
+		<property name="Cpf"  column="cpf" type="string"		unique="true" length="11"	not-null="true" />
 		<property name="Nascimento"	column="nascimento" type="Date"			not-null="true"	/>
 		<property name="Email"		column="email" type="string" length="100"		/>
 	</class>
