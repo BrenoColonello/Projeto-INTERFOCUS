@@ -93,6 +93,13 @@ namespace INTERFOCUS_PROJETO.Services
             return  Mutuarios;
         }
 
+        public Mutuario GetMutuario(int id)
+        {
+            using var sessao = session.OpenSession();
+            Mutuario mutuario = sessao.Get<Mutuario>(id);
+            return mutuario;
+        }
+
 
     }
 }
