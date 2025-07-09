@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InterfocusAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e29d023475e98f65c0d2d62c9f90079d07f3f14a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba04fcedc2acdb100eb2361baa85b9c6c2570f28")]
 [assembly: System.Reflection.AssemblyProductAttribute("InterfocusAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InterfocusAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

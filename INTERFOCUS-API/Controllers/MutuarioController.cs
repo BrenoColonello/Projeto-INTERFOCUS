@@ -22,6 +22,20 @@ namespace INTERFOCUS_API.Controllers
             return Ok(mutuarios);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetOneMutuario(int id)
+        {
+            var mutuario = mutuarioService.GetMutuario(id);
+            if (mutuario == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(mutuario);
+            }
+        }
+
         [HttpPost]
         public IActionResult Registrar([FromBody] Mutuario mutuario)
         {

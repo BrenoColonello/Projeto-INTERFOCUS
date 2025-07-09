@@ -56,3 +56,4 @@ C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\r
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\InterfocusAPI.pdb
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\InterfocusAPI.genruntimeconfig.cache
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\ref\InterfocusAPI.dll
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\bin\Debug\net8.0\hibernate.cfg.xml
