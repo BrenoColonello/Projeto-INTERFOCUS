@@ -23,5 +23,5 @@ CREATE TABLE IF NOT EXISTS divida(
 	dataCriacao TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	dataPagamento TIMESTAMP CHECK (dataPagamento IS NULL OR dataPagamento > dataCriacao),
 	descricao text not null,
-	id_mutuario INTEGER NOT NULL REFERENCES mutuario(id)
+	id_mutuario INTEGER NOT NULL REFERENCES mutuario(id) on delete cascade
 );

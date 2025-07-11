@@ -22,6 +22,8 @@
 
 		<EmbeddedResource Include="Mappings/Mutuario.hbm.xml" />
 		<!-- <EmbeddedResource Include="Mappings\Curso.hbm.xml" /> -->
+		<EmbeddedResource Include="Mappings/Divida.hbm.xml" />
+		
 	</ItemGroup>
 
   <ItemGroup>

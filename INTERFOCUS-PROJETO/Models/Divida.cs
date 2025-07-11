@@ -1,7 +1,8 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using INTERFOCUS_PROJETO.Models;
 
-    public class Divida
+public class Divida
 {
     [Required]
     public int Id { get; set; }
@@ -43,7 +44,7 @@ using System.ComponentModel.DataAnnotations;
             // {
             //     throw new ArgumentException("Data de criação ")
             // }
-            if (datacriacao.Value.CompareTo(DataPagamento) > 0)
+            if (value.Value.CompareTo(DataPagamento) > 0 && DataPagamento.HasValue)
             {
                 throw new ArgumentException("Data de criação não pode ocorrer após a data de pagamento");
             }
@@ -57,9 +58,9 @@ using System.ComponentModel.DataAnnotations;
         get { return datapagamento; }
         set
         {
-            if (datapagamento.HasValue && datapagamento.Value.CompareTo(DataCriacao) > 0)
+            if (value.HasValue && value.Value.CompareTo(DataCriacao) < 0)
             {
-                throw new ArgumentException("Data de criação não pode ocorrer após a data de pagamento");
+                throw new ArgumentException("Data de pagamento não pode ocorrer antes da data de criação");
             }
             datapagamento = value;
         }
@@ -69,6 +70,6 @@ using System.ComponentModel.DataAnnotations;
     public string Descricao { get; set; }
 
 
-    public virtual Cliente DividaCliente { get; set; }
+    public virtual Mutuario DividaMutuario { get; set; }
 
 }

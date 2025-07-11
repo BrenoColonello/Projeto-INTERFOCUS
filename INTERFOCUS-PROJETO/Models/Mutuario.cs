@@ -57,7 +57,7 @@ namespace INTERFOCUS_PROJETO.Models
         private string email;
         public string? Email { get { return email; } set => email = value.ToLower(); }
 
-        public virtual IList<Divida> DividasMutuario { get; set; } = new List<Divida>();
+        public virtual IList<Divida> DividasDoMutuario { get; set; } = new List<Divida>();
 
         // TODO REFACTOR EVERYTHING BELOW
 

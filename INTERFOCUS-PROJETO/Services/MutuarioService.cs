@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using INTERFOCUS_PROJETO.Models;
 using NHibernate;
+using System.Drawing.Drawing2D;
+using NHibernate.Linq;
 
 
 namespace INTERFOCUS_PROJETO.Services
@@ -78,7 +80,7 @@ namespace INTERFOCUS_PROJETO.Services
         public List<Mutuario> Listar()
         {
             using var sessao = session.OpenSession();
-            var mutuarios = sessao.Query<Mutuario>().ToList();
+            var mutuarios = sessao.Query<Mutuario>().Fetch(c => c.DividasDoMutuario).ToList();
             return mutuarios;
         }
 
@@ -87,7 +89,7 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             var Mutuarios = sessao.Query<Mutuario>()
                 .Where(c => c.Nome.Contains(busca) ||
-                            c.Email.Contains(busca))
+                            c.Email.Contains(busca)).Fetch(c => c.DividasDoMutuario)
                 .OrderBy(c => c.Id)
                 .ToList();
             return  Mutuarios;

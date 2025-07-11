@@ -15,10 +15,11 @@
 		<property name="DataCriacao" column="datacriacao" type="Date" not-null="true"/>
 		<property name="DataPagamento"	column="datapagamento" type="Date"	/>
 
-		<map name="DividasMutuario" cascade="all">
+		<property name="Descricao" column="descricao" not-null="true"/>
+		<!-- <bag name="DividasMutuario">
 			<key column="id_mutuario" not-null="true"></key>
-			<one-to-many class="Divida"></one-to-many>
-		</map>
-	</class>
+				</bag> -->
+			<many-to-one not-null="true" name="DividaMutuario" column="id_mutuario"></many-to-one>
+		</class>
 
 </hibernate-mapping>
