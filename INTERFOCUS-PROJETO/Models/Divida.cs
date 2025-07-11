@@ -33,8 +33,8 @@ using System.ComponentModel.DataAnnotations;
         }
     }
 
-    private DateTime datacriacao;
-    public DateTime DataCriacao
+    private DateTime? datacriacao;
+    public DateTime? DataCriacao
     {
         get { return datacriacao; }
         set
@@ -43,7 +43,7 @@ using System.ComponentModel.DataAnnotations;
             // {
             //     throw new ArgumentException("Data de criação ")
             // }
-            if (datacriacao.CompareTo(DataPagamento) > 0)
+            if (datacriacao.Value.CompareTo(DataPagamento) > 0)
             {
                 throw new ArgumentException("Data de criação não pode ocorrer após a data de pagamento");
             }
@@ -69,7 +69,6 @@ using System.ComponentModel.DataAnnotations;
     public string Descricao { get; set; }
 
 
-    [Required(ErrorMessage = "É necessário informar o dono da dívida")]
-    public int Id_cliente { get; set; }
+    public virtual Cliente DividaCliente { get; set; }
 
 }

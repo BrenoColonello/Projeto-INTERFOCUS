@@ -57,6 +57,10 @@ namespace INTERFOCUS_PROJETO.Models
         private string email;
         public string? Email { get { return email; } set => email = value.ToLower(); }
 
+        public virtual IList<Divida> DividasMutuario { get; set; } = new List<Divida>();
+
+        // TODO REFACTOR EVERYTHING BELOW
+
 
         private bool VerificarNascimento(DateTime data, out List<ValidationResult> erros)
         {
