@@ -63,7 +63,7 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             using var transaction = sessao.BeginTransaction();
             var mutuario = sessao.Query<Mutuario>()
-                .Where(c => c.Id == id)
+                .Where(c => c.Id == id).Fetch(c => c.DividasDoMutuario)
                 .FirstOrDefault();
             if (mutuario == null)
             {
@@ -89,7 +89,8 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             var Mutuarios = sessao.Query<Mutuario>()
                 .Where(c => c.Nome.Contains(busca) ||
-                            c.Email.Contains(busca)).Fetch(c => c.DividasDoMutuario)
+                            c.Email.Contains(busca)
+                            ).Fetch(c => c.DividasDoMutuario)
                 .OrderBy(c => c.Id)
                 .ToList();
             return  Mutuarios;
@@ -98,7 +99,9 @@ namespace INTERFOCUS_PROJETO.Services
         public Mutuario GetMutuario(int id)
         {
             using var sessao = session.OpenSession();
-            Mutuario mutuario = sessao.Get<Mutuario>(id);
+            Mutuario mutuario = sessao.Query<Mutuario>()
+            .Where(c => c.Id == id).Fetch(c => c.DividasDoMutuario)
+            .FirstOrDefault();
             return mutuario;
         }
 

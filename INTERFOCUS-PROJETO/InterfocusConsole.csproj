@@ -9,10 +9,6 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Services/" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Content Include="hibernate.cfg.xml">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
