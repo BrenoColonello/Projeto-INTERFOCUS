@@ -1,12 +1,17 @@
 using INTERFOCUS_PROJETO.Services;
 using NHibernate;
 using NHibernate.Cfg;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
 builder.Services.AddSingleton<ISessionFactory>((s) =>
 {
     var config = new Configuration();
@@ -18,7 +23,8 @@ builder.Services.AddSingleton<ISessionFactory>((s) =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<MutuarioService>();
-//builder.Services.AddTransient<CursoService>();
+builder.Services.AddTransient<DividaService>();
+
 
 builder.Services.AddCors(
     b => b.AddDefaultPolicy(

@@ -1,6 +1,94 @@
-﻿namespace INTERFOCUS_API.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+using INTERFOCUS_PROJETO.Services;
+using System.ComponentModel.DataAnnotations;
+using INTERFOCUS_PROJETO.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+
+namespace INTERFOCUS_API.Controllers
 {
-    public class DividaController
+    [Route("api/[controller]")]
+    public class DividaController : ControllerBase
     {
+
+        private readonly DividaService dividaService;
+
+        public DividaController(DividaService dividaService)
+        {
+            this.dividaService = dividaService;
+        }
+
+        [HttpGet]
+        public IActionResult Listar(string query = null)
+        {
+            var mutuarios = query == null ? dividaService.Listar() : dividaService.Listar(query);
+
+            return Ok(mutuarios);
+
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetOneClient(int id)
+        {
+            var mutuario = dividaService.GetDivida(id);
+            if (mutuario == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(mutuario);
+            }
+        }
+
+        //FIXME possible problem
+        [HttpPost]
+        public IActionResult Registrar([FromBody] Divida divida)
+        {
+            if (divida == null)
+            {
+                return BadRequest(ModelState);
+            }
+            var sucess = dividaService.Registrar(divida, out List<ValidationResult> erros);
+            if (!sucess)
+            {
+                return UnprocessableEntity(erros);
+            }
+
+            return Ok(divida);
+        }
+
+        [HttpPut]
+        public IActionResult Edit([FromBody] Divida divida)
+        {
+            if (divida == null)
+            {
+                return BadRequest(ModelState);
+            }
+            var sucesso = dividaService.Editar(divida,
+                out List<ValidationResult> erros);
+            if (sucesso == false)
+            {
+                return UnprocessableEntity(erros);
+            }
+            return Ok(divida);
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var divida = dividaService.Excluir(id, out _);
+            if (divida == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(divida);
+            }
+        }
+
     }
 }

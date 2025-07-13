@@ -2,6 +2,8 @@
 using INTERFOCUS_PROJETO.Models;
 using INTERFOCUS_PROJETO.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace INTERFOCUS_API.Controllers
 {
@@ -61,18 +63,13 @@ namespace INTERFOCUS_API.Controllers
             }
             var sucesso = mutuarioService.Editar(mutuario,
                 out List<ValidationResult> erros);
-            if (sucesso)
-            {
-                return Ok(mutuario);
-            }
-            else if (erros.Count == 0)
-            {
-                return NotFound();
-            }
-            else
+
+            if (sucesso == false)
             {
                 return UnprocessableEntity(erros);
             }
+            return Ok(mutuario);
+
         }
 
         [HttpDelete("{id}")]
