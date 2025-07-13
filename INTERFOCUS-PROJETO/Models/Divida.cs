@@ -69,6 +69,10 @@ public class Divida
     [Required(ErrorMessage = "É necessário fornecer descrição para a divida")]
     public string Descricao { get; set; }
 
+    //FIXME IMPLEMENTATION WAY
+
+    // public int IdCliente {get; set;}
+
 
     public virtual Mutuario DividaMutuario { get; set; }
 

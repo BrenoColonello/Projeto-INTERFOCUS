@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using NHibernate;
 using INTERFOCUS_PROJETO.Models;
+using NHibernate.Linq;
 
 namespace INTERFOCUS_PROJETO.Services
 {
@@ -80,7 +81,10 @@ namespace INTERFOCUS_PROJETO.Services
         public List<Divida> Listar()
         {
             using var sessao = session.OpenSession();
-            var dividas = sessao.Query<Divida>().ToList();
+            var dividas = sessao.Query<Divida>()
+            //.Fetch(d => d.DividaCliente)
+            //.ThenFetch(c => c.DividasDoCliente)
+            .ToList();
 
             return dividas;
         }
@@ -90,8 +94,10 @@ namespace INTERFOCUS_PROJETO.Services
         {
             using var sessao = session.OpenSession();
             var dividas = sessao.Query<Divida>()
-                .Where(c => c.Descricao.Contains(busca)) //||
-                                                         //c.Email.Contains(busca)).Fetch(c => c.DividasDoCliente)
+            .Where(c => c.Descricao.Contains(busca))
+                //.Fetch(c => c.DividaCliente)
+                //.ThenFetch(c => c.DividasDoCliente) //||
+                //c.Email.Contains(busca)).Fetch(c => c.DividasDoCliente)
                 .OrderBy(c => c.Id)
                 .ToList();
             return dividas;
