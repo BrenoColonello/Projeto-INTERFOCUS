@@ -72,7 +72,7 @@ public class Divida
     //FIXME IMPLEMENTATION WAY
 
     [Required(ErrorMessage = "É necessário informar o id do dono da divida")]
-    public virtual Mutuario DividaMutuario { get; set; }
+    public virtual Mutuario MutuarioDaDivida { get; set; }
     //public int IdMutuario {get; set;}
 
 }

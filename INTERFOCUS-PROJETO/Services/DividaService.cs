@@ -35,7 +35,7 @@ namespace INTERFOCUS_PROJETO.Services
             {
                 using var sessao = session.OpenSession();
 
-                Mutuario dono = sessao.Get<Mutuario>(divida.DividaMutuario);
+                Mutuario dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida);
                 if (dono == null)
                 {
                     erros.Add(new ValidationResult("Mutuario não existe"));
@@ -71,7 +71,7 @@ namespace INTERFOCUS_PROJETO.Services
                 using var transaction = sessao.BeginTransaction();
 
                 Divida registrada = sessao.Get<Divida>(divida.Id);
-                Mutuario dono = sessao.Get<Mutuario>(registrada.DividaMutuario);
+                Mutuario dono = sessao.Get<Mutuario>(registrada.MutuarioDaDivida);
 
                 if ((dono.LimiteDisponivel + registrada.Valor) < divida.Valor)
                 {
@@ -104,7 +104,7 @@ namespace INTERFOCUS_PROJETO.Services
                 return null;
             }
 
-            var dono = sessao.Get<Mutuario>(divida.DividaMutuario);
+            var dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida);
             dono.LimiteDisponivel += divida.Valor;
 
             sessao.Delete(divida);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InterfocusConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15fd5db74b6508b87e7b998b2815a3479466427b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af66ea9f5c03fb4ac9992f974b7430910b4dd5a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("InterfocusConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InterfocusConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

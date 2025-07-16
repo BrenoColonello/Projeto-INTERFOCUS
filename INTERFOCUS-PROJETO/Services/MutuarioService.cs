@@ -50,6 +50,13 @@ namespace INTERFOCUS_PROJETO.Services
             {
                 using var sessao = session.OpenSession();
                 using var transaction = sessao.BeginTransaction();
+
+                foreach (var divida in mutuario.DividasDoMutuario)
+                {
+                    divida.MutuarioDaDivida = mutuario;
+                }
+
+
                 sessao.Merge(mutuario);
                 transaction.Commit();
                 return true;
