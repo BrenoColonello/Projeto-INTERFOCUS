@@ -8,10 +8,10 @@ public class Divida
     public int Id { get; set; }
 
 
-    private int valor;
+    private float valor;
 
     [Required(ErrorMessage = "É necessário incluir um valor")]
-    public int Valor
+    public float Valor
     {
         get { return valor; }
         set
@@ -34,7 +34,7 @@ public class Divida
         }
     }
 
-    private DateTime? datacriacao;
+    private DateTime? datacriacao = DateTime.Now;
     public DateTime? DataCriacao
     {
         get { return datacriacao; }
@@ -44,7 +44,7 @@ public class Divida
             // {
             //     throw new ArgumentException("Data de criação ")
             // }
-            if (value.Value.CompareTo(DataPagamento) > 0 && DataPagamento.HasValue)
+            if (DataPagamento.HasValue && value.HasValue && value.Value.CompareTo(DataPagamento) > 0)
             {
                 throw new ArgumentException("Data de criação não pode ocorrer após a data de pagamento");
             }
@@ -71,9 +71,8 @@ public class Divida
 
     //FIXME IMPLEMENTATION WAY
 
-    // public int IdCliente {get; set;}
-
-
+    [Required(ErrorMessage = "É necessário informar o id do dono da divida")]
     public virtual Mutuario DividaMutuario { get; set; }
+    //public int IdMutuario {get; set;}
 
 }

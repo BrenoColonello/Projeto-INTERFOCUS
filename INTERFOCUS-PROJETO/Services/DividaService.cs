@@ -34,7 +34,25 @@ namespace INTERFOCUS_PROJETO.Services
             if (Validar(divida, out erros))
             {
                 using var sessao = session.OpenSession();
+
+                Mutuario dono = sessao.Get<Mutuario>(divida.DividaMutuario);
+                if (dono == null)
+                {
+                    erros.Add(new ValidationResult("Mutuario não existe"));
+                    return false;
+                }
+
+                if (dono.LimiteDisponivel < divida.Valor)
+                {
+                    erros.Add(new ValidationResult("Limite do Mutuario insuficiente"));
+                    return false;
+                }
+
                 using var transaction = sessao.BeginTransaction();
+
+                dono.LimiteDisponivel -= divida.Valor;
+
+                sessao.Merge(dono);
                 sessao.Save(divida);
                 transaction.Commit();
                 return true;
@@ -51,7 +69,20 @@ namespace INTERFOCUS_PROJETO.Services
             {
                 using var sessao = session.OpenSession();
                 using var transaction = sessao.BeginTransaction();
+
+                Divida registrada = sessao.Get<Divida>(divida.Id);
+                Mutuario dono = sessao.Get<Mutuario>(registrada.DividaMutuario);
+
+                if ((dono.LimiteDisponivel + registrada.Valor) < divida.Valor)
+                {
+                    return false;
+                }
+
+                dono.LimiteDisponivel += registrada.Valor;
+                dono.LimiteDisponivel -= divida.Valor;
+
                 sessao.Merge(divida);
+                sessao.Merge(dono);
                 transaction.Commit();
                 return true;
             }
@@ -73,7 +104,11 @@ namespace INTERFOCUS_PROJETO.Services
                 return null;
             }
 
+            var dono = sessao.Get<Mutuario>(divida.DividaMutuario);
+            dono.LimiteDisponivel += divida.Valor;
+
             sessao.Delete(divida);
+            sessao.Merge(dono);
             transaction.Commit();
             return divida;
         }
@@ -82,8 +117,7 @@ namespace INTERFOCUS_PROJETO.Services
         {
             using var sessao = session.OpenSession();
             var dividas = sessao.Query<Divida>()
-            .Fetch(d => d.DividaMutuario)
-            .ThenFetch(c => c.DividasDoMutuario)
+           
             .ToList();
 
             return dividas;
@@ -95,8 +129,8 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             var dividas = sessao.Query<Divida>()
             .Where(c => c.Descricao.Contains(busca))
-                .Fetch(c => c.DividaMutuario)
-                .ThenFetch(c => c.DividasDoMutuario)
+               // .Fetch(c => c.DividaMutuario)
+               // .ThenFetch(c => c.DividasDoMutuario)
                 .OrderBy(c => c.Id)
                 .ToList();
             return dividas;

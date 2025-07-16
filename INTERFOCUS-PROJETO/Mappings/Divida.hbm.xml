@@ -17,10 +17,12 @@
 
 		<property name="Descricao" column="descricao" not-null="true"/>
 
+		<!-- <property name="IdMutuario" column="id_mutuario"/> -->
+
 		<!-- FIXME selection -->
 
-		<!-- <property name="IdCliente" column="id_cliente"/> -->
-		<many-to-one not-null="true" name="DividaCliente" column="id_cliente"></many-to-one>
+
+		<many-to-one name="DividaMutuario" fetch="join" lazy="false" column="id_mutuario"></many-to-one>
 
 	</class>
 
