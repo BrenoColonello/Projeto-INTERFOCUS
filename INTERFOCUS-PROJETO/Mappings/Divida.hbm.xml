@@ -19,9 +19,6 @@
 
 		<!-- <property name="IdMutuario" column="id_mutuario"/> -->
 
-		<!-- FIXME selection -->
-
-
 		<many-to-one name="MutuarioDaDivida" fetch="join" lazy="false" column="id_mutuario"></many-to-one>
 
 	</class>

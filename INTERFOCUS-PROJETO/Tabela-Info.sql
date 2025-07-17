@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS mutuario(
 	cpf CHAR(11) UNIQUE NOT NULL ,
 	nascimento DATE NOT NULL,
 	email VARCHAR(100),
-	limite_disponivel DECIMAL(8,2) NOT NULL DEFAULT 200
+	--limite_disponivel DECIMAL(8,2) NOT NULL DEFAULT 200
 );
 
 CREATE TABLE IF NOT EXISTS divida(

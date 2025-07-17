@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using INTERFOCUS_PROJETO.Models;
 using NHibernate;
-using System.Drawing.Drawing2D;
 using NHibernate.Linq;
 
 
@@ -84,30 +83,45 @@ namespace INTERFOCUS_PROJETO.Services
             return mutuario;
         }
 
-        public List<Mutuario> Listar()
+        //TODO Paginamento, skip e take
+
+        public List<Mutuario> Listar(int page)
         {
             using var sessao = session.OpenSession();
-            var mutuarios = sessao.Query<Mutuario>().Fetch(c => c.DividasDoMutuario).ToList();
+            var mutuarios = sessao.Query<Mutuario>()
+                       .ToList();
+
+            mutuarios = mutuarios.OrderByDescending(c => ComandoService.SomarDividas(c))
+            .Skip((page - 1) * 10)
+            .Take(10)
+            .ToList();
+
             return mutuarios;
         }
 
-        public List<Mutuario> Listar(string busca)
+        public List<Mutuario> Listar(string busca, int page)
         {
             using var sessao = session.OpenSession();
-            var Mutuarios = sessao.Query<Mutuario>()
+            var mutuarios = sessao.Query<Mutuario>()
                 .Where(c => c.Nome.Contains(busca) ||
                             c.Email.Contains(busca)
-                            ).Fetch(c => c.DividasDoMutuario)
+                            )
                 .OrderBy(c => c.Id)
                 .ToList();
-            return  Mutuarios;
+
+            mutuarios = mutuarios.OrderByDescending(c => ComandoService.SomarDividas(c))
+            .Skip((page - 1) * 10)
+            .Take(10)
+            .ToList();
+
+            return mutuarios;
         }
 
         public Mutuario GetMutuario(int id)
         {
             using var sessao = session.OpenSession();
             Mutuario mutuario = sessao.Query<Mutuario>()
-            .Where(c => c.Id == id).Fetch(c => c.DividasDoMutuario)
+            .Where(c => c.Id == id)
             .FirstOrDefault();
             return mutuario;
         }

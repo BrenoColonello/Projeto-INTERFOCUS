@@ -14,9 +14,9 @@ namespace INTERFOCUS_PROJETO.services
         public static bool VerificarNascimento(DateTime data, out List<ValidationResult> erros)
         {
             erros = new List<ValidationResult>();
-            if (DateTime.Now < data)
+            if (DateTime.Today.AddYears(-18) < data)
             {
-                erros.Add(new ValidationResult($"Data nascimento {data.ToString()} posterior a data atual {DateTime.Now.ToString()}"));
+                erros.Add(new ValidationResult($"Necessário possuir pelo menos 18 anos"));
                 return false;
             }
             return true;

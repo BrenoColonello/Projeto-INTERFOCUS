@@ -42,17 +42,22 @@ namespace INTERFOCUS_PROJETO.Services
                     return false;
                 }
 
-                if (dono.LimiteDisponivel < divida.Valor)
+                if (divida.Situacao == false)
                 {
-                    erros.Add(new ValidationResult("Limite do Mutuario insuficiente"));
-                    return false;
+                    var total = ComandoService.SomarDividas(dono);
+                    total += divida.Valor;
+
+                    if (total > 200)
+                    {
+                        erros.Add(new ValidationResult("Valor ultrapassa limite de 200 reais de divida por cliente"));
+                        return false;
+                    }
                 }
 
-                using var transaction = sessao.BeginTransaction();
+                 using var transaction = sessao.BeginTransaction();
 
-                dono.LimiteDisponivel -= divida.Valor;
 
-                sessao.Merge(dono);
+               // sessao.Merge(dono);
                 sessao.Save(divida);
                 transaction.Commit();
                 return true;
@@ -71,18 +76,22 @@ namespace INTERFOCUS_PROJETO.Services
                 using var transaction = sessao.BeginTransaction();
 
                 Divida registrada = sessao.Get<Divida>(divida.Id);
-                Mutuario dono = sessao.Get<Mutuario>(registrada.MutuarioDaDivida);
+                Mutuario dono = sessao.Get<Mutuario>(registrada.MutuarioDaDivida.Id);
 
-                if ((dono.LimiteDisponivel + registrada.Valor) < divida.Valor)
+                if (divida.Situacao == false)
                 {
-                    return false;
+                    var total = ComandoService.SomarDividas(dono);
+                    total = registrada.Situacao ? total : total - registrada.Valor;
+
+                    if (total > 200 || (total + divida.Valor > 200))
+                    {
+                        return false;
+                    }
+
                 }
 
-                dono.LimiteDisponivel += registrada.Valor;
-                dono.LimiteDisponivel -= divida.Valor;
-
                 sessao.Merge(divida);
-                sessao.Merge(dono);
+                //sessao.Merge(dono);
                 transaction.Commit();
                 return true;
             }
@@ -104,8 +113,11 @@ namespace INTERFOCUS_PROJETO.Services
                 return null;
             }
 
-            var dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida);
-            dono.LimiteDisponivel += divida.Valor;
+
+            var dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida.Id);
+            dono.DividasDoMutuario.Remove(divida);
+            // var dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida);
+            // dono.LimiteDisponivel += divida.Valor;
 
             sessao.Delete(divida);
             sessao.Merge(dono);
@@ -120,6 +132,12 @@ namespace INTERFOCUS_PROJETO.Services
            
             .ToList();
 
+            foreach (var divida in dividas)
+            {
+                divida.MutuarioDaDivida.DividasDoMutuario = null;
+            }
+
+
             return dividas;
         }
 
@@ -129,10 +147,14 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             var dividas = sessao.Query<Divida>()
             .Where(c => c.Descricao.Contains(busca))
-               // .Fetch(c => c.DividaMutuario)
-               // .ThenFetch(c => c.DividasDoMutuario)
                 .OrderBy(c => c.Id)
                 .ToList();
+
+            foreach (var divida in dividas)
+            {
+                divida.MutuarioDaDivida.DividasDoMutuario = null;
+            }
+
             return dividas;
         }
 
@@ -140,6 +162,7 @@ namespace INTERFOCUS_PROJETO.Services
         {
             using var sessao = session.OpenSession();
             Divida divida = sessao.Get<Divida>(id);
+            divida.MutuarioDaDivida.DividasDoMutuario = null!;
             return divida;
         }
 
