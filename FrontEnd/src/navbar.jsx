@@ -1,4 +1,6 @@
 import "./navbar.css";
+import { Link } from "simple-react-routing";
+
 export default function Navbar() {
   
 
@@ -6,12 +8,14 @@ export default function Navbar() {
     <>
       <div className="navbar">
         <div className="Brand">
-          <h1>Projeto Interfocus</h1>
+          <Link to="/">
+            <h1>Projeto Interfocus</h1>
+          </Link>
         </div>
         
         <div className="links">
-          <a href="">Mutuarios</a>
-          <a href="">Dividas</a>
+          <Link to="/mutuarios">Mutuarios</Link>
+          <Link to="/dividas">Dividas</Link>
         </div>
       </div>
     </>

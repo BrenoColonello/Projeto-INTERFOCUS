@@ -1,4 +1,32 @@
 .mainTitle{
-    font-style: oblique;
-    text-align: center;
+font-style: oblique;
+text-align: center;
+}
+
+.home-links{
+    width: 40%;
+    padding-top: 10vh;   
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-links a button{
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    border-style: solid;
+    border-radius: 25px;
+    background-color: var(--background);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: .5s;
+}
+
+.home-links a button:hover{
+    scale: 1.05;
+    background-color: var(--hover-background);
 }

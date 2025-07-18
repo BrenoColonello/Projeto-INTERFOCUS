@@ -1,3 +1,15 @@
+* {
+  font-family: sans-serif;
+}
+
+:root{
+  --background: blue;
+  --hover-background: cornflowerblue;
+  --text-color: aliceblue;
+  --email-color: aqua;
+}
+
+
 body{
   margin: unset;
   padding: unset;
