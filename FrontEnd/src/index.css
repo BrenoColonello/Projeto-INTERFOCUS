@@ -90,7 +90,7 @@ body {
   background-color: rgb(1, 199, 1) !important;
 }
 
-input{
+input, textarea, select{
   color: black;
 }
 
@@ -126,7 +126,7 @@ input{
   padding: 5px;
 }
 
-.card-cliente-footer{
+.card-mutuario-footer{
   width: 20%;
   & button{
     padding: 15px;

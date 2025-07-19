@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "simple-react-routing";
+import { Link, useNavigation } from "simple-react-routing";
+import { DeletarDivida, mudarSituacao } from "../services/dividaService";
 
 export default function CardDivida({ divida }) {
   const criacao = new Date(divida.dataCriacao);
@@ -8,6 +9,18 @@ export default function CardDivida({ divida }) {
     criacao.getMonth() + 1
   }/${criacao.getFullYear()}`;
   const aberto = "Em aberto!";
+
+  const { navigateTo } = useNavigation();
+  const deletar = async (id) => {
+    DeletarDivida(id).then((response) => {
+      if (response.status == 200) {
+        response.json().then(() => {
+          navigateTo(null, "/");
+          window.location.reload();
+        });
+      }
+    });
+  };
 
   let pagamento, pagamentodata;
 
@@ -45,9 +58,11 @@ export default function CardDivida({ divida }) {
         </div>
         <hr />
         <div className="card-footer">
-          <button className="card-button">Excluir</button>
+          <button className="card-button" onClick={() => deletar(divida.id)}>
+            Excluir
+          </button>
 
-          <Link to={"/divida/" + divida.id}>
+          <Link to={"/dividas/" + divida.id}>
             <button className="card-button">Editar</button>
           </Link>
 
@@ -57,12 +72,13 @@ export default function CardDivida({ divida }) {
                 ? "card-button setPaid"
                 : "card-button setOpen"
             }
+            onClick={() => {
+              mudarSituacao(divida.id, !divida.situacao);
+            }}
           >
-            {
-              divida.situacao == false
-                ? "Marcar como paga"
-                : "Marcar como aberta"
-            }
+            {divida.situacao == false
+              ? "Marcar como paga"
+              : "Marcar como aberta"}
           </button>
         </div>
       </div>

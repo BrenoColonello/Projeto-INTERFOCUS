@@ -1,9 +1,20 @@
 import { Link } from "simple-react-routing";
 import { idadeAtual } from "../services/mutuarioService";
 import CardDivida from "./cardDivida"; // so identifica se o card for minusculo
+import { DeletarMutuario } from "../services/mutuarioService";
 
 /* eslint-disable react/prop-types */
 export default function ListaMutuario({ mutuario }) {
+
+
+  const deletar = async (id) => {
+    let resposta = await DeletarMutuario(id)
+    if(resposta.status == 200){
+      console.log("Deletado")
+      window.location.reload()
+    }
+  }
+
   let idade = idadeAtual(mutuario.nascimento);
   return (
     <>
@@ -28,7 +39,7 @@ export default function ListaMutuario({ mutuario }) {
           })}
         </div>
         <div className="card-footer card-mutuario-footer">
-          <button className="card-button">Excluir</button>
+          <button className="card-button" onClick={() => deletar(mutuario.id)}>Excluir</button>
           <Link to={"nutuarios/" + mutuario.id}>
             <button className="card-button">Editar</button>
             </Link>
