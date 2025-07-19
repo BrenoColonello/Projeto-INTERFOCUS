@@ -1,9 +1,7 @@
 import { BrowserRouter } from "simple-react-routing";
-import Home from "./home/home";
 import './App.css'
 import Layout from "./layout/layout";
-import ListaMutuarios from "./mutuarios/lista_mutuarios/lista_mutuarios";
-import ListaDividas from "./divida/lista_divida/Lista_Dividas"; //ta considerando meu arquivo com d minusculo nao sei o motivo
+
 
 function App() {
 
@@ -15,15 +13,6 @@ function App() {
           path: "",
           component: <Home></Home>
         },
-        {
-          path: "mutuarios",
-          component: <ListaMutuarios></ListaMutuarios>
-                  },
-        {
-          path: "dividas",
-          component: <ListaDividas></ListaDividas>
-        }
-      
       ]}>
         <Layout></Layout>
         </BrowserRouter>

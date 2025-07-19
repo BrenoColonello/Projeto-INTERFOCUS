@@ -1,21 +1,122 @@
 * {
   font-family: sans-serif;
+  color: aliceblue;
 }
 
-:root{
-  --background: blue;
-  --hover-background: cornflowerblue;
+:root {
+  --nav-background: red;
+  --nav-hover-background: rgb(249, 119, 119);
   --text-color: aliceblue;
   --email-color: aqua;
 }
 
 
-body{
+body {
+  background-color: black;
   margin: unset;
   padding: unset;
 }
 
-#root{
+#root {
   margin: unset;
   padding: unset;
+}
+
+.logo {
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  font-style: italic;
+  text-align: center;
+}
+
+.footer{
+  margin: auto;
+  margin-top: 10vh;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.esconder{
+  display: none;
+}
+
+.searchbar{
+  color: black;
+}
+
+.card{
+  width: 80%;
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  padding: 20px;
+  padding-top: 5px;
+  border-style: solid;
+  /* border-color: var(--text-color); */
+  border-color: gray;
+  border-radius: 25px;
+  border-width: 2px;
+}
+
+.card-personal-info h2{
+  margin-top: 10px;
+}
+
+.card-contact a{
+  padding-top: 10px;
+}
+
+.card-header{
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+}
+
+.card-button{
+  background-color: red;
+  border-style: none;
+  border-radius: 20px;
+}
+
+.setPaid{
+  background-color: green !important;
+}
+
+.card-main-content{
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  /* justify-content: space-around; */
+  overflow-x: scroll;
+}
+
+.card-divida{
+  min-width: 250px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: gray;
+  padding: 20px;
+}
+
+.card-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card-footer button{
+  padding: 5px;
+}
+
+.card-cliente-footer{
+  width: 20%;
+  & button{
+    padding: 15px;
+  }
 }
