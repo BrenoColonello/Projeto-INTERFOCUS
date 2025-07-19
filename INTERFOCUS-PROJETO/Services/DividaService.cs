@@ -70,13 +70,14 @@ namespace INTERFOCUS_PROJETO.Services
 
         public bool Editar(Divida divida, out List<ValidationResult> erros)
         {
+            using var sessao = session.OpenSession();
+            Mutuario dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida.Id);
+            divida.MutuarioDaDivida = dono;
             if (Validar(divida, out erros))
             {
-                using var sessao = session.OpenSession();
                 using var transaction = sessao.BeginTransaction();
 
                 Divida registrada = sessao.Get<Divida>(divida.Id);
-                Mutuario dono = sessao.Get<Mutuario>(registrada.MutuarioDaDivida.Id);
 
                 if (divida.Situacao == false)
                 {
@@ -129,11 +130,16 @@ namespace INTERFOCUS_PROJETO.Services
         {
             using var sessao = session.OpenSession();
             var dividas = sessao.Query<Divida>()
-                .OrderBy(c => c.Id)
-                .Skip((pagina - 1) * 10)
-                .Take(10)
+                .ToList();
 
-            .ToList();
+            dividas = dividas.OrderByDescending(d => d.Valor).ToList();
+
+            if (pagina > 0)
+            {
+                dividas = dividas
+                .Skip((pagina - 1) * 10)
+                .Take(10).ToList();
+            }
 
             foreach (var divida in dividas)
             {
@@ -167,6 +173,7 @@ namespace INTERFOCUS_PROJETO.Services
         {
             using var sessao = session.OpenSession();
             Divida divida = sessao.Get<Divida>(id);
+
             divida.MutuarioDaDivida.DividasDoMutuario = null!;
             return divida;
         }

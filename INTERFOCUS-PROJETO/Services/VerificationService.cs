@@ -76,9 +76,12 @@ namespace INTERFOCUS_PROJETO.services
     {
         public override bool IsValid(object? value)
         {
-            var erros = new List<ValidationResult>();
-            string cpf = value.ToString();
-            if (cpf.Length == 11)
+
+            if (value is string)
+            {
+                    var erros = new List<ValidationResult>();
+                string cpf = value.ToString()!;
+                if (cpf.Length == 11)
             {
                 StringBuilder componentesSb = new StringBuilder();
                 for (int i = 0; i < 9; i++)
@@ -108,6 +111,13 @@ namespace INTERFOCUS_PROJETO.services
                 erros.Add(new ValidationResult($"Tamnho esperado era 11 digitos porem foi inserido {cpf.Length} digitos"));
                 return false;
             }
+
+
+
+            }
+            //! possivelmente tem erro
+            return true;
+
         }
     }
 

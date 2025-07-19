@@ -71,7 +71,7 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             using var transaction = sessao.BeginTransaction();
             var mutuario = sessao.Query<Mutuario>()
-                .Where(c => c.Id == id).Fetch(c => c.DividasDoMutuario)
+                .Where(c => c.Id == id)
                 .FirstOrDefault();
             if (mutuario == null)
             {
@@ -91,10 +91,21 @@ namespace INTERFOCUS_PROJETO.Services
         {
             using var sessao = session.OpenSession();
             var mutuarios = sessao.Query<Mutuario>()
-                       .ToList();
+             .ToList();
 
-            mutuarios = mutuarios.OrderByDescending(c => ComandoService.SomarDividas(c))
-            .Skip((page - 1) * 10)
+            mutuarios = mutuarios.OrderByDescending(c => ComandoService.SomarDividas(c)).ToList();
+            mutuarios.ForEach(mutuario =>
+            {
+                mutuario.DividasDoMutuario = mutuario.DividasDoMutuario.OrderByDescending(d => d.Valor)
+                .OrderByDescending(d => d.Situacao == false)
+                .ToList();
+            });
+            if (page == -1)
+            {
+                return mutuarios;
+            }
+
+            mutuarios = mutuarios.Skip((page - 1) * 10)
             .Take(10)
             .ToList();
 
