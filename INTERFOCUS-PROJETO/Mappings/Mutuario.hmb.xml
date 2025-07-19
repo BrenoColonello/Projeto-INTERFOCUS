@@ -14,7 +14,7 @@
 		<property name="Nascimento"	column="nascimento" type="Date"			not-null="true"	/>
 		<property name="Email"		column="email" not-null="false" type="string" length="100"		/>
 		<!-- <property name="LimiteDisponivel" column="limite_disponivel" not-null="true" />		 -->
-		<bag name="DividasDoMutuario" cascade="save-update" inverse="true" lazy="false">
+		<bag name="DividasDoMutuario" cascade="none" inverse="true" lazy="false">
 			<key column="id_mutuario" on-delete="cascade" not-null="true"></key>
 			<one-to-many class="Divida"></one-to-many>
 		</bag>

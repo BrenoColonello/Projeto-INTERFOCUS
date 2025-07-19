@@ -20,6 +20,7 @@ namespace INTERFOCUS_PROJETO.Services
                     soma += divida.Valor;
                 }
             }
+            mutuario.TotalEmAberto = soma;
             return soma;
         }
     }

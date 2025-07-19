@@ -10,59 +10,6 @@ namespace INTERFOCUS_PROJETO.services
 {
     public class VerificationService
     {
-
-        public static bool VerificarNascimento(DateTime data, out List<ValidationResult> erros)
-        {
-            erros = new List<ValidationResult>();
-            if (DateTime.Today.AddYears(-18) < data)
-            {
-                erros.Add(new ValidationResult($"Necessário possuir pelo menos 18 anos"));
-                return false;
-            }
-            return true;
-        }
-
-        public static bool VerificarCpf(string cpf, out List<ValidationResult> erros)
-        {
-            erros = new List<ValidationResult>();
-            if (cpf.Length == 11)
-            {
-                StringBuilder componentesSb = new StringBuilder();
-
-                for (int i = 0; i < 9; i++)
-                {
-                    componentesSb.Append(cpf[i]);
-                }
-
-                string? primeiroDigito = calcularPrimeiroDigito(cpf, out erros);
-                if (erros.Count > 0)
-                {
-                    return false;
-                }
-
-                string componentes;
-                componentes = componentesSb.Append(primeiroDigito).ToString();
-                //segundo digito
-                string? segundoDigito = calcularSegundoDigito(componentes, out erros);
-
-                if (erros.Count > 0)
-                {
-                    return false;
-                }
-
-                componentesSb.Append(segundoDigito);
-                string verificador = componentesSb.ToString();
-
-                return verificador.Equals(cpf);
-
-            }
-            else
-            {
-                erros.Add(new ValidationResult($"Tamanho esperado era 11 digitos porem foi inserido {cpf.Length} digitos"));
-                return false;
-            }
-        }
-
         public static string? calcularPrimeiroDigito(string cpf, out List<ValidationResult> erros)
         {
             erros = new List<ValidationResult>();
@@ -125,4 +72,59 @@ namespace INTERFOCUS_PROJETO.services
 
     }
 
+    public class ValidCpf : ValidationAttribute
+    {
+        public override bool IsValid(object? value)
+        {
+            var erros = new List<ValidationResult>();
+            string cpf = value.ToString();
+            if (cpf.Length == 11)
+            {
+                StringBuilder componentesSb = new StringBuilder();
+                for (int i = 0; i < 9; i++)
+                {
+                    componentesSb.Append(cpf[i]);
+                }
+                string? primeiroDigito = VerificationService.calcularPrimeiroDigito(cpf, out erros);
+                if (erros.Count > 0)
+                {
+                    return false;
+                }
+                string componentes;
+                componentes = componentesSb.Append(primeiroDigito).ToString();
+                //segundo digito
+                string? segundoDigito = VerificationService.calcularSegundoDigito(componentes, out erros);
+                if (erros.Count > 0)
+                {
+                    return false;
+                }
+                componentesSb.Append(segundoDigito);
+                string verificador = componentesSb.ToString();
+                return verificador.Equals(cpf);
+
+            }
+            else
+            {
+                erros.Add(new ValidationResult($"Tamnho esperado era 11 digitos porem foi inserido {cpf.Length} digitos"));
+                return false;
+            }
+        }
+    }
+
+    public class IsAdult : ValidationAttribute
+    {
+        public override bool IsValid(object? value)
+        {
+            if (value is DateTime data)
+            {
+                if (DateTime.Today.AddYears(-18) < data)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 }
+ 

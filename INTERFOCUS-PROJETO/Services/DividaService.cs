@@ -49,7 +49,7 @@ namespace INTERFOCUS_PROJETO.Services
 
                     if (total > 200)
                     {
-                        erros.Add(new ValidationResult("Valor ultrapassa limite de 200 reais de divida por cliente"));
+                        erros.Add(new ValidationResult($"Valor ultrapassa limite de 200 reais de divida por mutuario {divida.Situacao}"));
                         return false;
                     }
                 }

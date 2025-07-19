@@ -24,17 +24,10 @@ public class Divida
         }
     }
 
-    private bool situacao;
-    public bool Situacao
-    {
-        get { return situacao; }
-        set
-        {
-
-        }
-    }
 
     private DateTime? datacriacao = DateTime.Now;
+
+    [Required(ErrorMessage = "Necessário informar data de criação")]
     public DateTime? DataCriacao
     {
         get { return datacriacao; }
@@ -66,9 +59,12 @@ public class Divida
         }
     }
 
+    //! TODO implementar logica
+    public bool Situacao { get; set; }
+
+
     [Required(ErrorMessage = "É necessário fornecer descrição para a divida")]
     public string Descricao { get; set; }
-
 
     [Required(ErrorMessage = "É necessário informar o id do dono da divida")]
     public virtual Mutuario MutuarioDaDivida { get; set; }
