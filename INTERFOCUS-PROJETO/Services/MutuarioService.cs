@@ -33,6 +33,7 @@ namespace INTERFOCUS_PROJETO.Services
             {
                 using var sessao = session.OpenSession();
                 using var transaction = sessao.BeginTransaction();
+                mutuario.DividasDoMutuario = null;
                 sessao.Save(mutuario);
                 transaction.Commit();
                 return true;
@@ -49,12 +50,13 @@ namespace INTERFOCUS_PROJETO.Services
             {
                 using var sessao = session.OpenSession();
                 using var transaction = sessao.BeginTransaction();
+                var registrado = sessao.Get<Mutuario>(mutuario.Id);
 
-                foreach (var divida in mutuario.DividasDoMutuario)
-                {
-                    divida.MutuarioDaDivida = mutuario;
-                }
-
+                //foreach (var divida in mutuario.DividasDoMutuario)
+                // {
+                //  divida.MutuarioDaDivida = mutuario;
+                // }
+                mutuario.DividasDoMutuario = registrado.DividasDoMutuario;
 
                 sessao.Merge(mutuario);
                 transaction.Commit();

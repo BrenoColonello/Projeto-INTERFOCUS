@@ -55,8 +55,18 @@ namespace INTERFOCUS_PROJETO.Models
                 nascimento = value;
             }
         }
-        private string email;
-        public string? Email { get { return email; } set => email = value.ToLower(); }
+        private string email = null;
+        public string? Email
+        {
+            get { return email; }
+            set
+            {
+                if (value != null)
+                {
+                    email = value.ToLower();
+                }
+            }
+        }
 
         public virtual IList<Divida> DividasDoMutuario { get; set; } = new List<Divida>();
 
