@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import "./lista_mutuarios.css";
-import { listaMutuarios, idadeAtual, somarDividas } from "/src/services/mutuarioService";
+import {
+  listarMutuarios,
+  idadeAtual,
+  somarDividas,
+} from "/src/services/mutuarioService";
+import {Link} from "simple-react-routing"
 
 export default function ListaMutuarios() {
   const [pagina, setPagina] = useState(1);
@@ -8,10 +13,9 @@ export default function ListaMutuarios() {
   const [mutuarios, setMutuarios] = useState([]);
 
   useEffect(() => {
-    listaMutuarios(pagina, pesquisa).then((resposta) => {
+    listarMutuarios(pagina, pesquisa).then((resposta) => {
       if (resposta.status == 200) {
         resposta.json().then((resposta) => {
-          console.log(resposta);
           setMutuarios(resposta);
         });
       }
@@ -23,13 +27,26 @@ export default function ListaMutuarios() {
       <div className="listaTitulo">
         <h1>Lista de mutuarios cadastrados</h1>
       </div>
+            <div className="lista-actions">
+        <div className="action-elements">
+        <div className="cadastrar">
+          <button className="lista-button">Cadastrar mutuario</button>
+        </div>
+        <div className="pesquisa">
+          <input type="search" placeholder="Buscar mutuario" value={pesquisa} onChange={(event) => {
+            setPesquisa(event.target.value)
+            setPagina(1)
+          }}/>
+        </div>
+        </div>
+      </div>
+
       <div className="lista">
         {mutuarios.map((mutuario) => {
-            let datanascimento =  idadeAtual(mutuario.nascimento)
-            let somaDasDividas = somarDividas(mutuario.dividasDoMutuario)
-
-          return (
-            <>
+          let datanascimento = idadeAtual(mutuario.nascimento);
+          let somaDasDividas = somarDividas(mutuario.dividasDoMutuario);
+            return(
+                <>
               <div className="card">
                 <div className="nome">
                   <h2>{mutuario.nome}</h2>
@@ -42,16 +59,21 @@ export default function ListaMutuarios() {
                     {mutuario.email}
                   </a>
                 </div>
-                <div className="divida">Valor em aberto: R${somaDasDividas}</div>
+                <div className="divida">
+                  Valor em aberto: R$:{somaDasDividas}
+                </div>
                 <hr />
                 <div className="footer">
                   <button className="excluir lista-button">Excluir</button>
-                  <button className="editar lista-button">Editar</button>
+                  <Link to={"/mutuarios/" + mutuario.id}><button className="editar lista-button">Editar</button></Link>
                 </div>
               </div>
-            </>
-          );
-        })}
+              </>
+            )
+              }
+              )}
+          
+        
       </div>
       <div className="page-navigator">
         <button
