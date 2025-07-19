@@ -1,12 +1,11 @@
-import {Link} from "simple-react-routing"
-import { idadeAtual, somarDividas } from "../services/mutuarioService";
+import { Link } from "simple-react-routing";
+import { idadeAtual } from "../services/mutuarioService";
 import CardDivida from "./cardDivida"; // so identifica se o card for minusculo
 
 /* eslint-disable react/prop-types */
 export default function ListaMutuario({ mutuario }) {
-  let idade = idadeAtual(mutuario.nascimento)
-  let total = somarDividas(mutuario.dividasDoMutuario)
-    return (
+  let idade = idadeAtual(mutuario.nascimento);
+  return (
     <>
       <div className="card">
         <div className="card-header">
@@ -15,20 +14,22 @@ export default function ListaMutuario({ mutuario }) {
             <p>Cpf: {mutuario.cpf}</p>
           </div>
           <div className="card-contact">
-            <a href={mutuario.email ? "mailto:" + mutuario.email : ""}  >{mutuario.email ? mutuario.email : "Não informado"}</a>
+            <a href={mutuario.email ? "mailto:" + mutuario.email : ""}>
+              {mutuario.email ? mutuario.email : "Não informado"}
+            </a>
             <p>Idade: {idade}</p>
-            <p>Valor total em aberto: {total}</p>
+            <p>Valor total em aberto: {mutuario.totalEmAberto}</p>
           </div>
         </div>
         <hr />
         <div className="card-main-content">
-            {mutuario.dividasDoMutuario.map(divida => {
-                return <CardDivida key={divida.id} divida={divida}></CardDivida>
-            })}
+          {mutuario.dividasDoMutuario.map((divida) => {
+            return <CardDivida key={divida.id} divida={divida}></CardDivida>;
+          })}
         </div>
         <div className="card-footer card-mutuario-footer">
-            <button className="card-button">Excluir</button>
-            <Link to={"mutuario/" + mutuario.id}>
+          <button className="card-button">Excluir</button>
+          <Link to={"nutuarios/" + mutuario.id}>
             <button className="card-button">Editar</button>
             </Link>
         </div>

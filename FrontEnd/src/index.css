@@ -83,7 +83,18 @@ body {
 
 .setPaid{
   background-color: green !important;
+  transition: .5s;
 }
+
+.setPaid:hover{
+  background-color: rgb(1, 199, 1) !important;
+}
+
+input{
+  color: black;
+}
+
+
 
 .card-main-content{
   display: flex;
@@ -96,6 +107,7 @@ body {
 
 .card-divida{
   min-width: 250px;
+  margin-top: 30px;
   margin-right: 20px;
   border-radius: 20px;
   border-style: solid;
@@ -119,4 +131,98 @@ body {
   & button{
     padding: 15px;
   }
+}
+
+.footer .card-button{
+  padding: 20px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.cadastros a{
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.cadastros{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.search input{
+  scale: 2;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  border-radius: 25px;
+  border-style: solid;
+  /* border-color: red; */
+  /* border-width: 2px; */
+}
+
+.card-button{
+  transition: .5s;
+}
+
+.card-button:hover{
+  cursor: pointer;
+  background-color: var(--nav-hover-background);
+}
+
+.search input::placeholder{
+  font-style: italic;
+  text-align: center;
+}
+
+.search button{
+  padding: 20px;
+}
+
+.mutuario-page{
+  display: flex;
+  width: 100vw;
+  height: 85vh;
+}
+
+.form-mutuario{
+  width: 60%;
+  margin-left: 30px;
+}
+
+.lista-dividas{
+  width: 30%;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.form-item{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+
+
+  & input{
+    margin-top: 10px;
+    width: 70%;
+  }
+
+}
+
+.form-buttons{
+  margin-top: 20px;
+
+  & button{
+    margin-left: 20px;
+    padding: 15px;
+  }
+}
+
+
+.form-item input:focus{
+  border-color: var(--nav-background);
 }

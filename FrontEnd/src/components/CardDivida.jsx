@@ -58,7 +58,11 @@ export default function CardDivida({ divida }) {
                 : "card-button setOpen"
             }
           >
-            Marcar como paga
+            {
+              divida.situacao == false
+                ? "Marcar como paga"
+                : "Marcar como aberta"
+            }
           </button>
         </div>
       </div>

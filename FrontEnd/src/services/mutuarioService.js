@@ -7,6 +7,26 @@ export  function listarMutuarios(pagina, pesquisa){
     return response
 }
 
+export function getMutuario(id){
+    let response = fetch(URL_API+"/api/mutuario/"+id)
+    return response
+}
+
+
+export function postMutuario(mutuario) {
+    let request = {
+        method: mutuario.id ? "PUT" : "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(mutuario)
+    }
+
+    let response = fetch(URL_API+"/api/mutuario", request)
+
+    return response
+}
+
 
 export function idadeAtual(nascimento){
     var today = new Date();
@@ -17,15 +37,4 @@ export function idadeAtual(nascimento){
         age--;
     }
     return age;
-}
-
-export function somarDividas(dividas){
-    let soma = 0
-    dividas.map(divida => {
-        if(divida.situacao == false){
-            soma += divida.valor
-        }
-    })
-    soma = parseFloat(soma)
-    return soma
 }
