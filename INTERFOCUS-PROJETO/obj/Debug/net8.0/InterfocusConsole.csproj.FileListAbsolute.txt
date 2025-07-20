@@ -31,3 +31,4 @@ C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\InterfocusConsole.pdb
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\InterfocusConsole.genruntimeconfig.cache
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\obj\Debug\net8.0\ref\InterfocusConsole.dll
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-PROJETO\bin\Debug\net8.0\hibernate.cfg.xml
