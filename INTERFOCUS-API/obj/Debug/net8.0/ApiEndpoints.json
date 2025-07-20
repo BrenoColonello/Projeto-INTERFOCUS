@@ -1,5 +1,90 @@
 [
   {
+    "ContainingType": "INTERFOCUS_API.Controllers.DividaController",
+    "Method": "Listar",
+    "RelativePath": "api/Divida",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "q",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "INTERFOCUS_API.Controllers.DividaController",
+    "Method": "Registrar",
+    "RelativePath": "api/Divida",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "divida",
+        "Type": "Divida",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "INTERFOCUS_API.Controllers.DividaController",
+    "Method": "Edit",
+    "RelativePath": "api/Divida",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "divida",
+        "Type": "Divida",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "INTERFOCUS_API.Controllers.DividaController",
+    "Method": "GetOneMutuario",
+    "RelativePath": "api/Divida/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "INTERFOCUS_API.Controllers.DividaController",
+    "Method": "Delete",
+    "RelativePath": "api/Divida/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "INTERFOCUS_API.Controllers.MutuarioController",
     "Method": "Listar",
     "RelativePath": "api/Mutuario",
@@ -8,8 +93,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "query",
+        "Name": "q",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -42,6 +132,22 @@
       {
         "Name": "mutuario",
         "Type": "INTERFOCUS_PROJETO.Models.Mutuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "INTERFOCUS_API.Controllers.MutuarioController",
+    "Method": "GetOneMutuario",
+    "RelativePath": "api/Mutuario/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

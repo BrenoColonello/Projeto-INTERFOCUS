@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using INTERFOCUS_PROJETO.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
 namespace INTERFOCUS_API.Controllers
@@ -20,16 +21,16 @@ namespace INTERFOCUS_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Listar(string query = null)
+        public IActionResult Listar(int page = 1, string q = null)
         {
-            var mutuarios = query == null ? dividaService.Listar() : dividaService.Listar(query);
+            var mutuarios = q == null ? dividaService.Listar(page) : dividaService.Listar(page, q);
 
             return Ok(mutuarios);
 
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetOneClient(int id)
+        public IActionResult GetOneMutuario(int id)
         {
             var mutuario = dividaService.GetDivida(id);
             if (mutuario == null)

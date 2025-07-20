@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -15,5 +15,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\INTERFOCUS-PROJETO\InterfocusConsole.csproj" />
 	</ItemGroup>
-
+	<ItemGroup>
+		<EmbeddedResource Include="Mappings\Divida.hbm.xml" />
+		<EmbeddedResource Include="Mappings\Mutuario.hbm.xml" />
+	</ItemGroup>
 </Project>

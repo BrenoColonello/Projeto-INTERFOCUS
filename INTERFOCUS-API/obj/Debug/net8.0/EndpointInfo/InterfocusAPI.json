@@ -5,6 +5,138 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Divida": {
+      "get": {
+        "tags": [
+          "Divida"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Divida"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Divida"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Divida"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Divida"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Divida"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Divida"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Divida"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Divida"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Divida/{id}": {
+      "get": {
+        "tags": [
+          "Divida"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Divida"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Mutuario": {
       "get": {
         "tags": [
@@ -12,10 +144,19 @@
         ],
         "parameters": [
           {
-            "name": "query",
+            "name": "q",
             "in": "query",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
             }
           }
         ],
@@ -85,6 +226,27 @@
       }
     },
     "/api/Mutuario/{id}": {
+      "get": {
+        "tags": [
+          "Mutuario"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Mutuario"
@@ -110,8 +272,49 @@
   },
   "components": {
     "schemas": {
+      "Divida": {
+        "required": [
+          "dataCriacao",
+          "descricao",
+          "id",
+          "mutuarioDaDivida",
+          "valor"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valor": {
+            "type": "number",
+            "format": "float"
+          },
+          "dataCriacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "situacao": {
+            "type": "boolean"
+          },
+          "descricao": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "mutuarioDaDivida": {
+            "$ref": "#/components/schemas/Mutuario"
+          }
+        },
+        "additionalProperties": false
+      },
       "Mutuario": {
         "required": [
+          "cpf",
           "nascimento",
           "nome"
         ],
@@ -127,8 +330,8 @@
             "type": "string"
           },
           "cpf": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "nascimento": {
             "type": "string",
@@ -136,6 +339,17 @@
           },
           "email": {
             "type": "string",
+            "nullable": true
+          },
+          "totalEmAberto": {
+            "type": "number",
+            "format": "float"
+          },
+          "dividasDoMutuario": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Divida"
+            },
             "nullable": true
           }
         },

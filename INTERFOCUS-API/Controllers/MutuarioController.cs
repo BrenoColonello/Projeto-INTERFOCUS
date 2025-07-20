@@ -18,9 +18,9 @@ namespace INTERFOCUS_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Listar(string query = null)
+        public IActionResult Listar(string q = null, int page = 1)
         {
-            var mutuarios = query == null ? mutuarioService.Listar() : mutuarioService.Listar(query);
+            var mutuarios = q == null ? mutuarioService.Listar(page) : mutuarioService.Listar(q, page);
             return Ok(mutuarios);
         }
 
