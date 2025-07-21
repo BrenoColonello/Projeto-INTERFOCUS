@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
-                   assembly="InterfocusConsole"
-                   namespace="InterfocusConsole.Models">
+                   assembly="INTERFOCUS-PROJETO"
+                   namespace="INTERFOCUS_PROJETO.Models">
 
 	<class name="Mutuario" table="mutuario">
 		<id name="Id" column="id" type="int">
