@@ -1,40 +1,40 @@
+// filepath: c:\Users\breno\source\repos\INTERFOCUS-PROJETO\FrontEnd\src\App.jsx
+import React from 'react';
 import { BrowserRouter } from "simple-react-routing";
 import './App.css'
-import Layout from "./layout/layout";
+import Layout from "./layout/layout";  // Mudou de "layout" para "Layout"
 import FormMutuario from "./components/formMutuario";
-import { FormDivida } from "./components/FormDivida";
+import { FormDivida } from "./components/formDivida";  // Mudou de "FormDivida" para "formDivida"
 import Home from "./layout/Home";
 
-
 function App() {
-
   return (
-<BrowserRouter
+    <BrowserRouter
       notFoundPage={<h1>404 - NOT FOUND</h1>}
       routes={[
         {
           path: "",
-          component: <Home></Home>
+          component: <Home />
         },
-                {
+        {
           path: "mutuarios/:codigo",
-          component: <FormMutuario></FormMutuario>
+          component: <FormMutuario />
         },
         {
           path: "mutuarios",
-          component: <FormMutuario></FormMutuario>
+          component: <FormMutuario />
         },
         {
           path: "dividas",
-          component: <FormDivida></FormDivida>
+          component: <FormDivida />
         },
         {
           path: "dividas/:codigo",
-          component: <FormDivida></FormDivida>
+          component: <FormDivida />
         }
       ]}>
-        <Layout></Layout>
-        </BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   );
 }
 

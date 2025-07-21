@@ -1,4 +1,4 @@
-const URL_API = "http://127.0.0.1:5189"; ////////////////
+const URL_API = "http://localhost:5140"; ////////////////
 
 export function listarMutuarios(pagina, pesquisa) {
   let query = "?page=" + pagina;
@@ -6,14 +6,13 @@ export function listarMutuarios(pagina, pesquisa) {
     ? fetch(URL_API + "/api/mutuario" + query + "&q=" + pesquisa)
     : fetch(URL_API + "/api/mutuario" + query);
 
-    return response;
+  return response;
 }
 
 export function getMutuario(id) {
   let response = fetch(URL_API + "/api/mutuario/" + id);
   return response;
 }
-
 
 export function postMutuario(mutuario) {
   let request = {
@@ -26,7 +25,7 @@ export function postMutuario(mutuario) {
 
   let response = fetch(URL_API + "/api/mutuario", request);
 
-    return response;
+  return response;
 }
 
 export function DeletarMutuario(id) {
@@ -36,7 +35,6 @@ export function DeletarMutuario(id) {
   let response = fetch(URL_API + "/api/mutuario/" + id, request);
   return response;
 }
-
 
 export function idadeAtual(nascimento) {
   var today = new Date();

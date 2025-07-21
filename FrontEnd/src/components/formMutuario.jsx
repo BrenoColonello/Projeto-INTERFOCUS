@@ -1,7 +1,7 @@
 import { useEffect, useState, useReducer } from "react";
 import { useRouter, useNavigation } from "simple-react-routing";
 import { DeletarMutuario, getMutuario, postMutuario } from "../services/mutuarioService";
-import CardDivida from "./cardDivida";
+import CardDivida from "./CardDivida";
 
 
 export default function FormMutuario() {

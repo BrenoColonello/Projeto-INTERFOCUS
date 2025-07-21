@@ -1,4 +1,4 @@
-const URL_API = "http://127.0.0.1:5189";
+const URL_API = "http://localhost:5140";
 
 export function listarDividas(pagina, pesquisa) {
   let query = "q=" + pesquisa;
@@ -6,9 +6,8 @@ export function listarDividas(pagina, pesquisa) {
     ? fetch(URL_API + "/api/divida?page=" + pagina + "&" + query)
     : fetch(URL_API + "/api/divida?page=" + pagina);
 
-    return response
+  return response;
 }
-
 
 export function postDivida(divida) {
   let request = {
