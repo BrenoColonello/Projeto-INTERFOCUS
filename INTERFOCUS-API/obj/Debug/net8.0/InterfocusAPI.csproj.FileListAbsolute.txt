@@ -49,7 +49,6 @@ C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\s
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.InterfocusAPI.props
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.InterfocusAPI.props
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\Interfoc.5FEC34E7.Up2Date
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\InterfocusAPI.dll
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\refint\InterfocusAPI.dll
@@ -57,3 +56,4 @@ C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\I
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\InterfocusAPI.genruntimeconfig.cache
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\ref\InterfocusAPI.dll
 C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\bin\Debug\net8.0\hibernate.cfg.xml
+C:\Users\breno\source\repos\INTERFOCUS-PROJETO\INTERFOCUS-API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
