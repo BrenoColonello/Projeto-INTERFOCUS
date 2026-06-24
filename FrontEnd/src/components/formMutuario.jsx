@@ -3,43 +3,33 @@ import { useRouter, useNavigation } from "simple-react-routing";
 import { DeletarMutuario, getMutuario, postMutuario } from "../services/mutuarioService";
 import CardDivida from "./CardDivida";
 
-
 export default function FormMutuario() {
   const { pathParams } = useRouter();
   const codigo = pathParams["codigo"];
   const [mutuario, setMutuario] = useState({});
   const [erro, setErro] = useState("");
-
-  const { navigateTo } = useNavigation()
+  const { navigateTo } = useNavigation();
 
   const [cpf, setCpf] = useReducer((old, value) => {
-    var digitos = value.replace(/[^0-9]+/g, "").substring(0, 11);
-
+    const digitos = value.replace(/[^0-9]+/g, "").substring(0, 11);
     if (digitos.length <= 3) return digitos;
-    else if (digitos.length <= 6) {
-      return digitos.replace(/(\d{3})(\d+)/, "$1.$2");
-    } else if (digitos.length <= 9) {
-      return digitos.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
-    } else {
-      return digitos.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "$1.$2.$3-$4");
-    }
+    if (digitos.length <= 6) return digitos.replace(/(\d{3})(\d+)/, "$1.$2");
+    if (digitos.length <= 9) return digitos.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
+    return digitos.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "$1.$2.$3-$4");
   }, "");
 
-  const [email, setEmail] = useReducer((old, value) => {
-    let email = value?.trim().replace(" ", "").toLowerCase();
-
-    return email;
-  });
+  const [email, setEmail] = useReducer((old, value) =>
+    value?.trim().replace(" ", "").toLowerCase()
+  );
 
   useEffect(() => {
     if (codigo) {
       getMutuario(codigo).then((response) => {
         if (response.status == 200) {
-          response.json().then((response) => {
-            setMutuario(response);
-            setCpf(response.cpf);
-            setEmail(response.email);
-            console.log(response);
+          response.json().then((data) => {
+            setMutuario(data);
+            setCpf(data.cpf);
+            setEmail(data.email);
           });
         }
       });
@@ -48,11 +38,10 @@ export default function FormMutuario() {
 
   const salvarMutuario = async (evento) => {
     evento.preventDefault();
-    let dados = new FormData(evento.target);
-    let strippedCpf = dados.get("cpf");
-    strippedCpf = strippedCpf.replace(/\D/g, "");
+    const dados = new FormData(evento.target);
+    const strippedCpf = dados.get("cpf").replace(/\D/g, "");
 
-    let mutuario = {
+    const payload = {
       nome: dados.get("nome"),
       cpf: strippedCpf,
       nascimento: dados.get("nascimento"),
@@ -60,69 +49,75 @@ export default function FormMutuario() {
       dividasDoMutuario: [],
     };
 
-    if (codigo) {
-      mutuario.id = codigo;
-    }
+    if (codigo) payload.id = codigo;
 
-    let resposta = await postMutuario(mutuario);
+    const resposta = await postMutuario(payload);
     if (resposta.status == 200) {
-      navigateTo(null, "/")
+      navigateTo(null, "/");
     } else {
-      let mensagem = await resposta.json();
+      const mensagem = await resposta.json();
       setErro("Erro: " + JSON.stringify(mensagem, null, "\t"));
     }
   };
 
   const deletar = async (id) => {
-    let resposta = await DeletarMutuario(id)
-    if(resposta.status == 200){
-      console.log("Deletado")
-      navigateTo(null, "/")
-    }
-  }
-
+    const resposta = await DeletarMutuario(id);
+    if (resposta.status == 200) navigateTo(null, "/");
+  };
 
   return (
-    <>
-      <div className="mutuario-page">
-        <div className="form-mutuario">
-          <h1>{codigo ? "Editar" : "Cadastrar"} mutuario</h1>
+    <div className="form-page">
+      <div className="form-section">
+        <h1>{codigo ? "Editar" : "Cadastrar"} Mutuário</h1>
+        <p className="form-subtitle">
+          {codigo ? "Atualize os dados do mutuário abaixo." : "Preencha os dados para cadastrar um novo mutuário."}
+        </p>
+
+        <div className="form-card">
           <form onSubmit={salvarMutuario}>
-            <div className="nome form-item">
-              <label htmlFor="nome">Nome:</label>
+            <div className="form-item">
+              <label htmlFor="nome">Nome completo</label>
               <input
+                className="form-input"
                 type="text"
                 name="nome"
                 id="nome"
+                placeholder="Ex: João da Silva"
                 defaultValue={mutuario.nome}
               />
             </div>
-            <div className="cpf form-item">
-              <label htmlFor="cpf">Cpf:</label>
+
+            <div className="form-item">
+              <label htmlFor="cpf">CPF</label>
               <input
+                className="form-input"
                 name="cpf"
                 id="cpf"
                 type="text"
                 maxLength={14}
-                onChange={(e) => {
-                  setCpf(e.target.value);
-                }}
+                placeholder="000.000.000-00"
+                onChange={(e) => setCpf(e.target.value)}
                 value={cpf}
               />
             </div>
-            <div className="email form-item">
-              <label htmlFor="email">Email:</label>
+
+            <div className="form-item">
+              <label htmlFor="email">E-mail</label>
               <input
+                className="form-input"
                 type="email"
                 name="email"
                 id="email"
+                placeholder="email@exemplo.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="nascimento form-item">
+
+            <div className="form-item">
               <label htmlFor="nascimento">Data de nascimento</label>
               <input
+                className="form-input"
                 type="date"
                 name="nascimento"
                 id="nascimento"
@@ -130,38 +125,54 @@ export default function FormMutuario() {
               />
             </div>
 
-            <div className="form-buttons">
-              <button
-                className="card-button"
-                type="button"
-                onClick={() => deletar(mutuario.id) == 200 ? console.log("oi") : console.log("falha ao deletar")}
-              >
-                Excluir
+            <div className="form-actions">
+              {codigo && (
+                <button
+                  className="btn btn-danger"
+                  type="button"
+                  onClick={() => deletar(mutuario.id)}
+                >
+                  Excluir mutuário
+                </button>
+              )}
+              <button className="btn btn-primary" type="submit">
+                {codigo ? "Salvar alterações" : "Cadastrar"}
               </button>
-              <button className="card-button" type="submit">
-                Salvar mudanças
+              <button className="btn btn-ghost" type="button" onClick={() => navigateTo(null, "/")}>
+                Cancelar
               </button>
-              {/* <button className="card-button"></button> */}
             </div>
           </form>
-          {erro ? <p>{erro}</p> : <></>}
-        </div>
-        <hr />
 
+          {erro && <div className="form-error">{erro}</div>}
+        </div>
+      </div>
+
+      <div className="sidebar-divider" />
+
+      <div className="sidebar-dividas">
+        <h3>Dívidas do mutuário</h3>
         {mutuario.id ? (
-          <div className="lista-dividas">
-            <div className="titulo">
-              <h3>Dividas do mutuario</h3>
-              <hr />
+          <>
+            <p className="sidebar-subtitle">
+              {mutuario.dividasDoMutuario?.length ?? 0} dívida(s) registrada(s)
+            </p>
+            <div className="sidebar-scroll">
+              {mutuario.dividasDoMutuario?.length === 0 ? (
+                <div className="no-mutuario-msg">Nenhuma dívida registrada.</div>
+              ) : (
+                mutuario.dividasDoMutuario?.map((divida) => (
+                  <CardDivida key={divida.id} divida={divida} />
+                ))
+              )}
             </div>
-            {mutuario.dividasDoMutuario.map((divida) => {
-              return <CardDivida key={divida.id} divida={divida}></CardDivida>;
-            })}
-          </div>
+          </>
         ) : (
-          <p>Não é possivel listar dividas de um mutuario não cadastrado</p>
+          <div className="no-mutuario-msg">
+            Dívidas disponíveis após o cadastro.
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

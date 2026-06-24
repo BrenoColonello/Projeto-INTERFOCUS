@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter } from "simple-react-routing";
 import './App.css'
-import Layout from "./layout/layout";  // Mudou de "layout" para "Layout"
+import Layout from "./layout/Layout";  // Mudou de "layout" para "Layout"
 import FormMutuario from "./components/formMutuario";
 import { FormDivida } from "./components/formDivida";  // Mudou de "FormDivida" para "formDivida"
 import Home from "./layout/Home";

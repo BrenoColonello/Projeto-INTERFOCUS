@@ -19,66 +19,70 @@ export default function Home() {
   }, [pagina, pesquisa]);
 
   return (
-    <>
-      <div className="logo">
-        <h1>Exibindo informações de mutuarios cadastrados</h1>
+    <div className="home-container">
+      <div className="home-header">
+        <h1>Mutuários</h1>
+        <p>Gerencie mutuários e suas dívidas cadastradas no sistema.</p>
       </div>
-      <div className="search">
-        <input
-          type="search"
-          name=""
-          id=""
-          className="searchbar"
-          onChange={(event) => {
-            setPesquisa(event.target.value);
-            setPagina(1);
-          }}
-          placeholder="Pesquisar mutuario"
-        />
-        <div className="cadastros">
+
+      <div className="search-bar-container">
+        <div className="search-input-wrapper">
+          <span className="search-icon">🔍</span>
+          <input
+            type="search"
+            className="search-input"
+            onChange={(event) => {
+              setPesquisa(event.target.value);
+              setPagina(1);
+            }}
+            placeholder="Buscar por nome ou CPF..."
+          />
+        </div>
+        <div className="action-buttons">
           <Link to="mutuarios">
-            <button className="card-button">Cadastrar mutuario</button>
+            <button className="btn btn-ghost">+ Mutuário</button>
           </Link>
-
           <Link to="dividas">
-            <button className="card-button">Cadastrar divida</button>
+            <button className="btn btn-primary">+ Dívida</button>
           </Link>
         </div>
       </div>
 
-      <div className="footer">
-        <div
-          className={pagina == 1 ? "esconder card-button" : "card-button"}
-          onClick={() => {
-            setPagina(Math.max(1, pagina - 1));
-          }}
-        >
-          Anterior
-        </div>
-        {pagina}
-        <div className="card-button" onClick={() => setPagina(pagina + 1)}>
-          Proximo
-        </div>
-      </div>
+      <Pagination pagina={pagina} setPagina={setPagina} />
 
-      {mutuarios.map((mutuario) => {
-        return <ListaMutuario key={mutuario.id} mutuario={mutuario}></ListaMutuario>
-      })}
+      {mutuarios.length === 0 ? (
+        <div className="no-mutuario-msg" style={{ marginTop: 40, padding: 40 }}>
+          <p style={{ fontSize: '1rem' }}>Nenhum mutuário encontrado.</p>
+        </div>
+      ) : (
+        mutuarios.map((mutuario) => (
+          <ListaMutuario key={mutuario.id} mutuario={mutuario} />
+        ))
+      )}
 
-      <div className="footer">
-        <div
-          className={pagina == 1 ? "esconder card-button" : "card-button"}
-          onClick={() => {
-            setPagina(Math.max(1, pagina - 1));
-          }}
-        >
-          Anterior
-        </div>
-        {pagina}
-        <div className="card-button" onClick={() => setPagina(pagina + 1)}>
-          Proximo
-        </div>
-      </div>
-    </>
+      {mutuarios.length > 0 && (
+        <Pagination pagina={pagina} setPagina={setPagina} />
+      )}
+    </div>
+  );
+}
+
+function Pagination({ pagina, setPagina }) {
+  return (
+    <div className="pagination">
+      <button
+        className={`btn btn-ghost btn-sm ${pagina === 1 ? 'esconder' : ''}`}
+        onClick={() => setPagina(Math.max(1, pagina - 1))}
+      >
+        ← Anterior
+      </button>
+      <span className="pagination-info">Página {pagina}</span>
+      <button
+        className="btn btn-ghost btn-sm"
+        onClick={() => setPagina(pagina + 1)}
+      >
+        Próximo →
+      </button>
+    </div>
   );
 }

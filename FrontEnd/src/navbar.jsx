@@ -2,22 +2,17 @@ import "./navbar.css";
 import { Link } from "simple-react-routing";
 
 export default function Navbar() {
-  
-
   return (
-    <>
-      <div className="navbar">
-        <div className="Brand">
-          <Link to="/">
-            <h1>Projeto Interfocus</h1>
-          </Link>
-        </div>
-        
-        <div className="links">
-          <Link to="/mutuarios">Cadastrar mutuario</Link>
-          <Link to="/dividas"> Cadastrar divida</Link>
-        </div>
+    <nav className="navbar">
+      <Link to="/" className="navbar-brand">
+        <div className="navbar-brand-icon">IF</div>
+        <span className="navbar-brand-text">Inter<span>focus</span></span>
+      </Link>
+
+      <div className="navbar-links">
+        <Link to="/mutuarios">Novo Mutuário</Link>
+        <Link to="/dividas" className="navbar-btn">+ Nova Dívida</Link>
       </div>
-    </>
+    </nav>
   );
 }
