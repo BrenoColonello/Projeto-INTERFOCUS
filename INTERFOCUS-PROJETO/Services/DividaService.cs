@@ -35,7 +35,7 @@ namespace INTERFOCUS_PROJETO.Services
             {
                 using var sessao = session.OpenSession();
 
-                Mutuario dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida);
+                Mutuario dono = sessao.Get<Mutuario>(divida.MutuarioDaDivida.Id);
                 if (dono == null)
                 {
                     erros.Add(new ValidationResult("Mutuario não existe"));
@@ -86,6 +86,7 @@ namespace INTERFOCUS_PROJETO.Services
 
                     if (total > 200 || (total + divida.Valor > 200))
                     {
+                        erros.Add(new ValidationResult("Valor total de dívidas em aberto ultrapassa o limite de R$ 200,00"));
                         return false;
                     }
 
@@ -174,6 +175,7 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             Divida divida = sessao.Get<Divida>(id);
 
+            if (divida == null) return null;
             divida.MutuarioDaDivida.DividasDoMutuario = null!;
             return divida;
         }

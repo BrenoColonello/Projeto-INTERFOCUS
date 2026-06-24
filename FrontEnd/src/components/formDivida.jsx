@@ -9,7 +9,7 @@ export function FormDivida() {
   const [listaMutuarios, setListaMutuarios] = useState([]);
   const [divida, setDivida] = useState({});
   const [erro, setErro] = useState("");
-  const [idMutuario, setIdMutuario] = useState(null);
+  const [idMutuario, setIdMutuario] = useState("");
   const { navigateTo } = useNavigation();
 
   const deletar = async (id) => {
@@ -25,7 +25,12 @@ export function FormDivida() {
   useEffect(() => {
     listarMutuarios(-1).then((response) => {
       if (response.status == 200) {
-        response.json().then((data) => setListaMutuarios(data));
+        response.json().then((data) => {
+          setListaMutuarios(data);
+          if (!codigo && data.length > 0) {
+            setIdMutuario(String(data[0].id));
+          }
+        });
       }
     });
 
@@ -34,7 +39,7 @@ export function FormDivida() {
         if (response.status == 200) {
           response.json().then((data) => {
             setDivida(data);
-            setIdMutuario(data.mutuarioDaDivida.id);
+            setIdMutuario(String(data.mutuarioDaDivida.id));
           });
         }
       });
@@ -45,17 +50,17 @@ export function FormDivida() {
     evento.preventDefault();
     const dados = new FormData(evento.target);
     const payload = {
-      valor: dados.get("valor"),
+      valor: Number(dados.get("valor")),
       dataCriacao: dados.get("dataCriacao"),
       situacao: dados.get("situacao") === "pago",
       descricao: dados.get("descricao"),
-      mutuarioDaDivida: { id: dados.get("mutuarioDaDivida") },
+      mutuarioDaDivida: { id: Number(idMutuario) },
     };
 
     if (dados.get("dataPagamento")) {
       payload.dataPagamento = dados.get("dataPagamento");
     }
-    if (codigo) payload.id = codigo;
+    if (codigo) payload.id = Number(codigo);
 
     const resposta = await postDivida(payload);
     if (resposta.status == 200) {
@@ -84,7 +89,7 @@ export function FormDivida() {
                 name="valor"
                 id="valor"
                 step="0.01"
-                min="0"
+                min="0.01"
                 placeholder="0,00"
                 defaultValue={divida.valor}
               />
@@ -94,12 +99,13 @@ export function FormDivida() {
               <label htmlFor="mutuarioDaDivida">Mutuário responsável</label>
               <select
                 className="form-input"
-                defaultValue={idMutuario}
+                value={idMutuario}
                 name="mutuarioDaDivida"
                 id="mutuarioDaDivida"
+                onChange={(e) => setIdMutuario(e.target.value)}
               >
                 {listaMutuarios.map((m) => (
-                  <option value={m.id} key={m.id}>
+                  <option value={String(m.id)} key={m.id}>
                     {m.nome} — Em aberto: R$ {Number(m.totalEmAberto || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </option>
                 ))}

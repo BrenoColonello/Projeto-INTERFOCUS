@@ -16,7 +16,7 @@ public class Divida
         get { return valor; }
         set
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 throw new ArgumentOutOfRangeException("value", "Valor deve ser maior que 0");
             }

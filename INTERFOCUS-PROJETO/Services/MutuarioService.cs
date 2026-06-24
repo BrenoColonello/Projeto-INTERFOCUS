@@ -117,7 +117,8 @@ namespace INTERFOCUS_PROJETO.Services
             using var sessao = session.OpenSession();
             var mutuarios = sessao.Query<Mutuario>()
                 .Where(c => c.Nome.Contains(busca) ||
-                            c.Email.Contains(busca)
+                            c.Cpf.Contains(busca) ||
+                            (c.Email != null && c.Email.Contains(busca))
                             )
                 .OrderBy(c => c.Id)
                 .ToList();
